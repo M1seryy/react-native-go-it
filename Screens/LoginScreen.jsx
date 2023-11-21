@@ -1,5 +1,5 @@
 import { useFonts } from "expo-font";
-import React from "react";
+import React, { useState } from "react";
 import {
   Button,
   ImageBackground,
@@ -11,9 +11,15 @@ import {
 } from "react-native";
 
 const LoginScreen = () => {
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
   const [fontsLoaded] = useFonts({
     "Inter-Black": require("../assets/fonts/Roboto/robot.ttf"),
   });
+
+  const formData = () => {
+    console.log({ email, password });
+  };
   const styles = StyleSheet.create({
     mainReg: {
       width: "100%",
@@ -75,15 +81,18 @@ const LoginScreen = () => {
         <TextInput
           placeholder="Адреса електронної пошти"
           style={styles.input}
+          value={email}
+          onChangeText={(e) => setEmail(e)}
         />
         <TextInput
           secureTextEntry={true}
           placeholder="Пароль"
-          // keyboardType="password"
+          value={password}
           style={styles.input}
+          onChangeText={(e) => setPassword(e)}
         />
-        <TouchableOpacity style={styles.regBtn}>
-          <Text style={{ color: "white", fontSize: 20 }}>Зареєстуватися</Text>
+        <TouchableOpacity onPress={formData} style={styles.regBtn}>
+          <Text style={{ color: "white", fontSize: 20 }}>Увійти</Text>
         </TouchableOpacity>
         <Text style={styles.singIn}>Немає акаунту? Зареєструватися</Text>
       </View>

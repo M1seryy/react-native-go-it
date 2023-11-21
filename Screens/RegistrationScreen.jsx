@@ -1,5 +1,5 @@
 import { useFonts } from "expo-font";
-import React from "react";
+import React, { useState } from "react";
 import {
   Button,
   ImageBackground,
@@ -71,9 +71,16 @@ const styles = StyleSheet.create({
 });
 
 const RegistrationScreen = () => {
+  const [login, setLogin] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
   const [fontsLoaded] = useFonts({
     "Inter-Black": require("../assets/fonts/Roboto/robot.ttf"),
   });
+
+  const formData = () => {
+    console.log({ login, email, password });
+  };
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS == "ios" ? "padding" : "height"}
@@ -92,21 +99,30 @@ const RegistrationScreen = () => {
             </View>
             <Text style={styles.title}>Реєстрація</Text>
 
-            <TextInput placeholder="Логін" style={styles.input} />
+            <TextInput
+              placeholder="Логін"
+              value={login}
+              style={styles.input}
+              onChangeText={(e) => setLogin(e)}
+            />
 
             <TextInput
               placeholder="Адреса електронної пошти"
+              value={email}
+              onChangeText={(e) => setEmail(e)}
               style={styles.input}
             />
 
             <TextInput
               secureTextEntry={true}
+              value={password}
               placeholder="Пароль"
+              onChangeText={(e) => setPassword(e)}
               style={styles.input}
             />
 
             <TouchableOpacity style={styles.regBtn}>
-              <Text style={{ color: "white", fontSize: 20 }}>
+              <Text style={{ color: "white", fontSize: 20 }} onPress={formData}>
                 Зареєстуватися
               </Text>
             </TouchableOpacity>
