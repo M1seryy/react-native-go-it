@@ -3,10 +3,13 @@ import React, { useState } from "react";
 import {
   Button,
   ImageBackground,
+  Keyboard,
+  KeyboardAvoidingView,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   View,
 } from "react-native";
 
@@ -34,7 +37,6 @@ const LoginScreen = () => {
       borderWidth: 1,
       position: "absolute",
       bottom: 0,
-      left: 35,
       backgroundColor: "#FFFFFF",
       gap: 25,
     },
@@ -71,32 +73,38 @@ const LoginScreen = () => {
     },
   });
   return (
-    <View>
-      <ImageBackground
-        style={{ width: 500, height: "100%" }}
-        source={require("../img/back.png")}
-      ></ImageBackground>
-      <View style={styles.mainReg}>
-        <Text style={styles.title}>Увійти</Text>
-        <TextInput
-          placeholder="Адреса електронної пошти"
-          style={styles.input}
-          value={email}
-          onChangeText={(e) => setEmail(e)}
-        />
-        <TextInput
-          secureTextEntry={true}
-          placeholder="Пароль"
-          value={password}
-          style={styles.input}
-          onChangeText={(e) => setPassword(e)}
-        />
-        <TouchableOpacity onPress={formData} style={styles.regBtn}>
-          <Text style={{ color: "white", fontSize: 20 }}>Увійти</Text>
-        </TouchableOpacity>
-        <Text style={styles.singIn}>Немає акаунту? Зареєструватися</Text>
-      </View>
-    </View>
+    <KeyboardAvoidingView
+      behavior={Platform.OS == "ios" ? "padding" : "height"}
+    >
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View>
+          <ImageBackground
+            style={{ width: 500, height: "100%" }}
+            source={require("../img/back.png")}
+          ></ImageBackground>
+          <View style={styles.mainReg}>
+            <Text style={styles.title}>Увійти</Text>
+            <TextInput
+              placeholder="Адреса електронної пошти"
+              style={styles.input}
+              value={email}
+              onChangeText={(e) => setEmail(e)}
+            />
+            <TextInput
+              secureTextEntry={true}
+              placeholder="Пароль"
+              value={password}
+              style={styles.input}
+              onChangeText={(e) => setPassword(e)}
+            />
+            <TouchableOpacity onPress={formData} style={styles.regBtn}>
+              <Text style={{ color: "white", fontSize: 20 }}>Увійти</Text>
+            </TouchableOpacity>
+            <Text style={styles.singIn}>Немає акаунту? Зареєструватися</Text>
+          </View>
+        </View>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 };
 
