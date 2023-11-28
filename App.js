@@ -4,6 +4,7 @@ import RegistrationScreen from "./Screens/RegistrationScreen";
 import { useFonts } from "expo-font";
 import LoginScreen from "./Screens/LoginScreen";
 import font from "./assets/fonts/Roboto/robot.ttf";
+import CreatePost from "./Screens/CreatePost";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -12,7 +13,8 @@ export default function App() {
   return (
     <View style={styles.container}>
       {/* <RegistrationScreen /> */}
-      <LoginScreen />
+      {/* <LoginScreen /> */}
+      <CreatePost/>
       <StatusBar style="auto" />
     </View>
   );
